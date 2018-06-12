@@ -51,7 +51,7 @@ def VGG_16(weights_path=None):
     model.add(Dropout(0.5))
     model.add(Dense(1000, activation='relu'))
     model.add(Dense(100, activation='relu'))
-    model.add(Dense(1, activation='sigmoid')) 
+    model.add(Dense(1, activation='softmax')) 
 
 
     if weights_path:
@@ -71,6 +71,6 @@ if __name__ == "__main__":
     # Test pretrained model
     model = VGG_16('vgg16_weights.h5')
     sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(optimizer=sgd, loss='binary_crossentropy')
+    model.compile(optimizer=SGD, loss='mse')
     out = model.predict(img)
 
